@@ -28,15 +28,15 @@ def is_safe_to_visit(url):
     if response.status_code == 200:
         data = response.json()
         if "matches" in data:
-            return False
-        else:
             return True
+        else:
+            return False
     else:
         print("Error:", response.status_code)
-        return False
+        return True
 
 
-website_url = "https://www.youtube.com"
+website_url = "https://www.youtube.com/channel/UCV1Ns3fF3unrbg9YPseAe2g"
 
 if is_safe_to_visit(website_url):
     print("Website is safe to visit.")
