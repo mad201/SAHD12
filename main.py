@@ -1,7 +1,7 @@
 import requests
-API_KEY = "youtube"
-BASE_URL = "https://www.youtube.com/"
 
+API_KEY = "your_youtube_safe_browsing_api_key"
+BASE_URL = "https://safebrowsing.googleapis.com/v4/threatMatches:find"
 
 def is_safe_to_visit(url):
     payload = {
@@ -27,14 +27,13 @@ def is_safe_to_visit(url):
 
     if response.status_code == 200:
         data = response.json()
-        if "matches" in data:
-            return True
+        if "matches" in data and data["matches"]:
+            return False  # If matches are found, it's not safe
         else:
-            return False
+            return True  # If no matches, it's safe
     else:
         print("Error:", response.status_code)
         return True
-
 
 website_url = "https://www.youtube.com/channel/UCV1Ns3fF3unrbg9YPseAe2g"
 
